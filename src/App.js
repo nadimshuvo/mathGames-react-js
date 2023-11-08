@@ -1,13 +1,15 @@
-function App() {
-  const [score, setScore] = React.useState(0)
-  const [mistakes, setMistakes] = React.useState(0)
-  const [currentProblem, setCurrentProblem] = React.useState(generateProblem())
-  const [userAnswer, setUserAnswer] = React.useState("")
-  const [showError, setShowError] = React.useState(false)
-  const answerField = React.useRef(null)
-  const resetButton = React.useRef(null)
+import React, { useEffect, useRef, useState } from "react";
 
-  React.useEffect(() => {
+function App() {
+  const [score, setScore] = useState(0)
+  const [mistakes, setMistakes] = useState(0)
+  const [currentProblem, setCurrentProblem] = useState(generateProblem())
+  const [userAnswer, setUserAnswer] = useState("")
+  const [showError, setShowError] = useState(false)
+  const answerField = useRef(null)
+  const resetButton = useRef(null)
+
+  useEffect(() => {
     if (score == 10 || mistakes == 3) {
       setTimeout(() => resetButton.current.focus(), 331)
     }
@@ -58,7 +60,7 @@ function App() {
   }
 
   return (
-    <>
+    <React.Fragment>
       <div
         className={"main-ui" + (mistakes == 3 || score == 10 ? " blurred" : "")}
       >
@@ -105,7 +107,7 @@ function App() {
           </button>
         </div>
       </div>
-    </>
+    </React.Fragment>
   )
 }
 
